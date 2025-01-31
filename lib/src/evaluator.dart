@@ -174,9 +174,13 @@ class ExpressionEvaluator {
       case '-':
         return left - right();
       case '*':
-        return left * right();
+        // Fix Multiplication of cents, shift by 2
+        final result = (left * right()) as double;
+        return result / 100;
       case '/':
-        return left / right();
+        // Fix Division of cents, shift by 2
+        final result = (left / right()) as double;
+        return result * 100;
       case '%':
         return left % right();
       case '~/':
